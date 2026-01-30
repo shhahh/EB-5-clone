@@ -7,11 +7,10 @@ const Mission = () => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => { 
-        // Jab user thoda sa bhi enter karega (0.1 threshold), animation trigger hogi
         if (entry.isIntersecting) {
           setIsVisible(true);
         } else {
-          setIsVisible(false); // Reset taaki har baar scroll pe drop ho (optional)
+          setIsVisible(false); 
         }
       },
       { threshold: 0.1 } 
@@ -36,16 +35,17 @@ const Mission = () => {
       backgroundImage: 'url("/images/slide-img-02.jpg")',
       backgroundSize: 'cover', backgroundPosition: 'center', overflow: 'hidden'
     }}>
+      {/* Dark Overlay */}
       <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(0,0,0,0.65)', zIndex: 1 }}></div>
 
-      {/* Class change to animate-falling-heavy */}
+      {/* Content Wrapper */}
       <div className={`mission-content-wrapper ${isVisible ? 'animate-falling-heavy' : ''}`} style={{
         position: 'relative', zIndex: 2, width: '100%', maxWidth: '1200px', 
         padding: '0 80px', opacity: isVisible ? 1 : 0
       }}>
         
-        <div style={{ maxWidth: '850px' }}>
-          <h2 style={{
+        <div style={{ maxWidth: '850px' }} className="mission-inner-container">
+          <h2 className="mission-title" style={{
             fontFamily: '"Staatliches", sans-serif', fontSize: '50px', color: '#FFFFFF', 
             marginBottom: '5px', marginLeft: '-50px', textTransform: 'uppercase',
             fontWeight: '500', letterSpacing: '0.5px'
@@ -55,7 +55,7 @@ const Mission = () => {
 
           <ul style={{ listStyle: 'none', padding: 0, marginBottom: '25px' }}>
             {items.map((item, index) => (
-              <li key={index} style={{
+              <li className="mission-list-item" key={index} style={{
                 display: 'flex', alignItems: 'flex-start', gap: '12px', color: '#fff',
                 fontSize: '20px', marginLeft: '-50px', marginBottom: '18px', 
                 fontWeight: '500', fontFamily: '"Roboto", sans-serif', lineHeight: '1.1'
@@ -70,7 +70,7 @@ const Mission = () => {
             ))}
           </ul>
 
-          <button className="hero-btn-final" style={{ marginLeft: '-50px' }}>
+          <button className="hero-btn-final mission-btn" style={{ marginLeft: '-50px' }}>
              <svg width="24" height="24" viewBox="0 0 512 512" fill="currentColor">
                 <path d="M504 256C504 119 393 8 256 8S8 119 8 256s111 248 248 248 248-111 248-248zM256 472c-118.7 0-216-97.3-216-216 0-118.7 97.3-216 216-216 118.7 0 216 97.3 216 216 0 118.7-97.3 216-216 216zm-48-242.5V184c0-6.6 5.4-12 12-12h41.4c6.4 0 12.5 2.5 17 7l72.7 73c4.7 4.7 4.7 12.3 0 17l-72.7 73c-4.5 4.5-10.6 7-17 7H220c-6.6 0-12-5.4-12-12v-30.5c0-4.5 2.5-8.5 6.4-10.3l56.9-25.6c6.1-2.8 6.1-11.4 0-14.2l-56.9-25.6c-3.9-1.8-6.4-5.8-6.4-10.3z"/>
              </svg>
@@ -78,6 +78,34 @@ const Mission = () => {
           </button>
         </div>
       </div>
+
+      {/* MOBILE RESPONSIVE STYLES (Desktop stays untouched) */}
+      <style>{`
+        @media (max-width: 768px) {
+          .mission-content-wrapper {
+            padding: 0 25px !important; /* Mobile padding reduced */
+          }
+          
+          .mission-title {
+            font-size: 32px !important; /* Smaller font on mobile */
+            margin-left: 0 !important; /* Margin reset */
+            margin-bottom: 20px !important;
+          }
+
+          .mission-list-item {
+            font-size: 16px !important; /* Smaller list text */
+            margin-left: 0 !important; /* Margin reset */
+            margin-bottom: 15px !important;
+            line-height: 1.3 !important;
+          }
+
+          .mission-btn {
+            margin-left: 0 !important; /* Margin reset */
+            width: 100%; /* Optional: Full width button on mobile */
+            justify-content: center;
+          }
+        }
+      `}</style>
     </section>
   );
 };
