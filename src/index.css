@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-heading {
+  font-family: 'Staatliches', sans-serif;
+}
+
+.font-body {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Scroll Snapping for the whole page */
+html {
+  scroll-behavior: smooth;
+}
+
+section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+/* Slide Up Animation */
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slideUpFade 1s ease-out forwards;
+}
+
+/* Utility to hide horizontal overflow */
+body {
+  scroll-snap-type: y proximity;
+}
+
+/* Hero wala Slide Up */
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mission wala Slide Down (Girne wala effect) */
+@keyframes slideDownFade {
+  from { opacity: 0; transform: translateY(-70px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-up { animation: slideUpFade 1s ease-out forwards; }
+.animate-slide-down { animation: slideDownFade 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+
+/* Global Button Style (Hero and Mission same) */
+.hero-btn-final {
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  font-weight: 700;
+  padding: 12px 35px;
+  background-color: transparent;
+  color: #FFFFFF;
+  border: 1px solid #FFFFFF;
+  border-radius: 50px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+}
+
+.hero-btn-final:hover {
+  background-color: #FFFFFF !important;
+  color: #000 !important;
+}
+
+.hero-btn-final svg {
+  transition: transform 0.3s ease;
+}
+
+.hero-btn-final:hover svg {
+  fill: #000;
+}
+
+/* Heavy Fall from Hero Section */
+@keyframes fallFromHero {
+  0% {
+    opacity: 0;
+    transform: translateY(-100vh); /* Starts from the Hero section area */
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(0); /* Hits its position */
+  }
+  75% {
+    transform: translateY(-30px); /* Heavy impact bounce up */
+  }
+  90% {
+    transform: translateY(5px); /* Small settle bounce */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-falling-heavy {
+  /* 1.2s duration for a heavy feel, ease-in for gravity effect */
+  animation: fallFromHero 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+
+/* Rotating Border Animation for Buttons 4th section */
+@keyframes rotateBorder {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animated-border-btn {
+  position: relative;
+  padding: 12px 35px;
+  background: transparent;
+  color: white;
+  border-radius: 50px;
+  font-weight: 700;
+  text-transform: uppercase;
+  overflow: hidden;
+  cursor: pointer;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ye "border" effect create karega jo ghumta hai */
+.animated-border-btn::before {
+  content: '';
+  position: absolute;
+  width: 150%;
+  height: 500%;
+  background: conic-gradient(#ffffff, transparent, transparent, #ffffff);
+  animation: rotateBorder 3s linear infinite;
+  z-index: -2;
+}
+
+/* Ye button ke andar ka black background cover hai */
+.animated-border-btn::after {
+  content: '';
+  position: absolute;
+  inset: 2px; /* Border thickness */
+  background: #000;
+  border-radius: 50px;
+  z-index: -1;
+}
+
+.animated-border-btn:hover::after {
+  background: #ffffff;
+}
+.animated-border-btn:hover {
+  color: #000;
+}
